@@ -12,11 +12,22 @@ Vector2 SeparationRule::computeForce(const std::vector<Boid*>& neighborhood, Boi
     if (!neighborhood.empty()) {
         Vector2 position = boid->transform.position;
         int countCloseFlockmates = 0;
-
+        for (int i = 0; i < neighborhood.size(); i++)
+        {
+            if (sqrt(pow((neighborhood[i]->getPosition().x - position.x), 2) + pow((neighborhood[i]->getPosition().y - position.y), 2)) < desiredMinimalDistance)
+            {
+                separatingForce += (position - neighborhood[i]->getPosition()) * (1.0 / sqrt(pow((neighborhood[i]->getPosition().x - position.x), 2) + pow((neighborhood[i]->getPosition().y - position.y), 2)));
+                countCloseFlockmates++;
+            }
+        }
+        if (countCloseFlockmates != 0)
+        {
+            separatingForce /= countCloseFlockmates;
+        }
 
     }
 
-    separatingForce = Vector2::normalized(separatingForce);
+    //separatingForce = Vector2::normalized(separatingForce);
 
     return separatingForce;
 }

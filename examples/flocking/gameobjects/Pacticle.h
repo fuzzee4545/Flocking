@@ -16,12 +16,13 @@ private:
     Vector2 acceleration;
     Vector2 previousAcceleration; //to draw Acc
     Polygon polygon;
+    Vector2 velocity;
 
     //Methods
     void resetAcceleration();
 
 public:
-    Vector2 velocity; // todo: make this private
+    //Vector2 velocity; // todo: make this private
     bool drawAcceleration = false;
     Vector3 color; // todo: make this private
 
